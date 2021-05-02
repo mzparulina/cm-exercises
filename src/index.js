@@ -17,21 +17,26 @@ const sortArr = dataArr.map((a, b) => {
 
 sortArr.map((element, index, arr) => {
   var menu = document.getElementById("menu");
-  var menuTitle = element[0].charAt(0).toUpperCase() + element[0].slice(1);
   var section = document.createElement("section");
+  var h3 = document.createElement("h3");
+  var ul = document.createElement("ul");
+
+  var menuTitle = element[0].charAt(0).toUpperCase() + element[0].slice(1);
   section.setAttribute("id", element[0]);
-  section.appendChild(document.createTextNode(menuTitle));
   menu.appendChild(section);
 
+  h3.setAttribute("id", index);
+  h3.appendChild(document.createTextNode(menuTitle));
+  section.appendChild(h3);
+  section.appendChild(ul);
   element[1].map((el, i) => {
-    var ul = document.createElement("ul");
-    section.appendChild(ul);
     var li = document.createElement("li");
     li.setAttribute("id", el.name);
     li.setAttribute("class", el.spicy ? "spicy" : "");
-    li.appendChild(document.createTextNode(el.name + " - $" + el.price));
+    li.innerHTML = el.name + " - $" + el.price;
     ul.appendChild(li);
     return el;
   });
+
   return element;
 });
